@@ -55,29 +55,31 @@
       </div>
     </nav>
     <div class="container" style="margin-top:60px">
+      <h3 class="text-muted my-3">Patients</h3>
       <div class="card">
         <div class="card-header">
-          Patient List 
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter</button>
         </div>
         <div class="card-body">
-          <table class="table table-striped table-bordered">
-            <thead>
-              <th>Nom</th>
-              <th>Prenom</th>
-              <th>Age</th>
-              <th>Sex</th>
-              <th>Date RDV</th>
-              <th>Etat</th>
-            </thead>
+          <table class="table table-bordered table-striped text-center">
+            <tbody>
+            <tr>
+              <td>Nom</td>
+              <td>Prenom</td>
+              <td>Age</td>
+              <td>Sex</td>
+              <td></td>
+            </tr>
+            </tbody>
             <tbody>
               <tr v-for="data in dataList" :key="data._id">
-                <td>{{data.patient.nom}}</td>
-                <td>{{data.patient.prenom}}</td>
-                <td>{{data.patient.age}}</td>
-                <td>{{data.patient.sex}}</td>
-                <td>{{data.date_rdv}}</td>
-                <td><a class="btn btn-success btn-sm"> {{data.status}}</a></td>
+                <td>{{data.nom}}</td>
+                <td>{{data.prenom}}</td>
+                <td>{{data.age}}</td>
+                <td>{{data.sex}}</td>
+                <td>
+                  <a href="" class="btn btn-secondary">Modifier</a>  <a href="" class="btn btn-danger"> Supprimer </a>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -91,7 +93,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'HelloWorld',
+  name: 'PatientsComponent',
   data () {
     return {
       dataList:{}
@@ -106,7 +108,7 @@ export default {
   methods: {
     getdata() {
       axios
-      .get('http://localhost:4000/api/rendez_vs')
+      .get('http://localhost:4000/api/patients')
       .then(res => {
         this.dataList = res.data;
         console.log(res);
