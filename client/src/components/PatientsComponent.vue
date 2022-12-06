@@ -5,15 +5,34 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter un patient</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            ...
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Nom:</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Prenom:</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Age</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Sex</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Tele</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-primary">Valider</button>
           </div>
         </div>
       </div>
@@ -61,7 +80,7 @@
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter</button>
         </div>
         <div class="card-body">
-          <table class="table table-bordered table-striped text-center">
+          <table  class="table table-bordered table-striped text-center">
             <tbody>
             <tr>
               <td>Nom</td>
@@ -81,6 +100,7 @@
                   <a href="" class="btn btn-secondary">Modifier</a>  <a href="" class="btn btn-danger"> Supprimer </a>
                 </td>
               </tr>
+
             </tbody>
           </table>
         </div>
@@ -96,7 +116,11 @@ export default {
   name: 'PatientsComponent',
   data () {
     return {
-      dataList:{}
+      dataList:{},
+      nom: '',
+      prenom: '',
+      age: '',
+      sex: ''
     }
   },
   props: {
@@ -113,7 +137,18 @@ export default {
         this.dataList = res.data;
         console.log(res);
       })
+    },
+     AddPatient() {
+      axios
+      .post('http://localhost:4000/api/patients', {
+          nom: '',
+          prenom: '',
+          age: '',
+          sex: ''
+      })
+      .then(this.getdata())
     }
+
   }
 }
 </script>

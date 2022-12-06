@@ -6,7 +6,7 @@
 <script>
 
 import axios from 'axios';
-export default {
+export default { 
 
   name: 'ActesComponent',
   data () {
