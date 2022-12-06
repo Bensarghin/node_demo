@@ -6,10 +6,15 @@ import 'bootstrap/dist/js/bootstrap.bundle.js';
 import Actes from './components/ActesComponent.vue';
 import RendezVous from './components/RendezVous.vue';
 import Patients from './components/PatientsComponent.vue';
+import Home from './components/HomeComponent.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 
 const routes = [
+    {
+        path: '/',
+        component: Home
+    },
     {
         path: '/rendezvous',
         component: RendezVous

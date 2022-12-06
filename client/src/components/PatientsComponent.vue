@@ -1,4 +1,5 @@
 <template>
+
   <div>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -10,95 +11,88 @@
           </div>
           <div class="modal-body">
             <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">Nom:</label>
-              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+              <input class="form-control" type="text" placeholder="Nom patient" v-model="nom">
             </div>
             <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">Prenom:</label>
-              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+              <input name="" placeholder="Prenom" id="" class="form-control" v-model="prenom">
             </div>
             <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">Age</label>
-              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+              <input type="number" class="form-control" placeholder="age" v-model="age" >
             </div>
             <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">Sex</label>
-              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+              <input type="tele" class="form-control" placeholder="tele" v-model="tele">
             </div>
-            <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">Tele</label>
-              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" v-model="sex" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="homme">
+              <label class="form-check-label" for="inlineRadio1">Homme</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" v-model="sex" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="femme">
+              <label class="form-check-label" for="inlineRadio2">Femme</label>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-            <button type="button" class="btn btn-primary">Valider</button>
+            <button type="button" class="btn btn-secondary" id="close" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" @click="modPatient()">Enregistrer</button>
           </div>
         </div>
       </div>
     </div>
-    <nav class="navbar navbar-expand-lg bg-light">
-      <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled">Disabled</a>
-            </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+    <div class="modal fade" id="rdvModal" tabindex="-1" aria-labelledby="rdvModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="rdvModalLabel">Rendez vous</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="exampleSelect">Date Rendez Vous:</label>
+              <input class="form-control" type="date" v-model="date_rdv">
+            </div>
+            <label for="exampleSelect">l'Acte</label>
+            <div class="mb-3">
+              <select class="form-control" v-model="acte" id="exampleSelect">
+                <option selected>....</option>
+                <option :value="data._id" v-for="data in actes" :key="data._id">{{data.nom}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="close2" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" @click="AddRdv()">Enregistrer</button>
+          </div>
         </div>
       </div>
-    </nav>
+    </div>
     <div class="container" style="margin-top:60px">
       <h3 class="text-muted my-3">Patients</h3>
+      <button type="button" class="btn btn-primary my-3" @click="emptyPatient()" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter</button>
+
       <div class="card">
-        <div class="card-header">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter</button>
-        </div>
         <div class="card-body">
-          <table  class="table table-bordered table-striped text-center">
-            <tbody>
+          <table class="table table-striped text-center">
+            <thead class="bg-dark text-light">
             <tr>
+              <td>#</td>
               <td>Nom</td>
               <td>Prenom</td>
               <td>Age</td>
               <td>Sex</td>
               <td></td>
             </tr>
-            </tbody>
+            </thead>
             <tbody>
-              <tr v-for="data in dataList" :key="data._id">
+              <tr v-for="(data, index) in dataList" :key="data._id">
+                <td>{{(index+1)}}</td>
                 <td>{{data.nom}}</td>
                 <td>{{data.prenom}}</td>
                 <td>{{data.age}}</td>
                 <td>{{data.sex}}</td>
                 <td>
-                  <a href="" class="btn btn-secondary">Modifier</a>  <a href="" class="btn btn-danger"> Supprimer </a>
-                </td>
+                  <a class="btn btn-success mx-2" data-bs-toggle="modal" @click="AffecterIdPatient(data._id)" data-bs-target="#rdvModal">Rdv +</a>
+                  <a @click="fillPatient(data)" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier</a>     
+                  <a @click="DeletePatient(data._id)" class="btn btn-secondary mx-2"> Supprimer </a>                </td>
               </tr>
 
             </tbody>
@@ -108,47 +102,144 @@
     </div>
     </div>
 </template>
+
+
+
 <script lang="js">
 
 import axios from 'axios';
 
 export default {
-  name: 'PatientsComponent',
-  data () {
-    return {
-      dataList:{},
-      nom: '',
-      prenom: '',
-      age: '',
-      sex: ''
-    }
-  },
-  props: {
-    msg: String
-  },
-  created() {
-    this.getdata()
-  },
-  methods: {
-    getdata() {
-      axios
-      .get('http://localhost:4000/api/patients')
-      .then(res => {
-        this.dataList = res.data;
-        console.log(res);
-      })
-    },
-     AddPatient() {
-      axios
-      .post('http://localhost:4000/api/patients', {
-          nom: '',
-          prenom: '',
-          age: '',
-          sex: ''
-      })
-      .then(this.getdata())
-    }
 
+name: 'patientsComponent',
+data () {
+  return {
+    dataList:{},
+    errors:{},
+    patient:"",
+    actes:[],
+    acte: '',
+    date_rdv:'',
+    id: '',
+    nom : '',
+    prenom : '',
+    age : '',
+    sex : '',
+    tele: '',
+    patient_id : '',
+    update: false
   }
+},
+created() {
+  this.getdata();
+  this.getactes();
+},
+methods: {
+  getdata() {
+    axios
+    .get('http://localhost:4000/api/patients')
+    .then(res => {
+      this.dataList = res.data;
+      console.log(res);
+    })
+  },
+  getactes() {
+    axios
+    .get('http://localhost:4000/api/actes')
+    .then(res => {
+      this.actes = res.data;
+      console.log(res);
+    })
+  },
+  modPatient() {
+    // put request
+    if(this.update) {
+    axios
+    .put('http://localhost:4000/api/patients/'+this.id,{
+      nom : this.nom,
+      prenom : this.prenom,
+      age : this.age,
+      sex : this.sex,
+      tele: this.tele
+    })
+    .then(res => {
+      this.dataList = res.data;
+      console.log(res);
+      this.getdata();
+      const close = document.getElementById('close');
+      close.click();
+    })
+      
+    }
+    // put request
+    else {
+    axios
+    .post('http://localhost:4000/api/patients',{
+      nom : this.nom,
+      prenom : this.prenom,
+      age : this.age,
+      sex : this.sex,
+      tele: this.tele
+    })
+    .then(res => {
+      this.dataList = res.data;
+      console.log(res);
+      this.getdata();
+      const close = document.getElementById('close');
+      close.click();
+    })
+      
+    }
+  },
+  // fill in fields
+  emptyPatient() {
+    this.update = false;
+    this.nom = '';
+    this.prenom = '';
+    this.age = '';
+    this.sex = '';
+    this.tele = '';
+  },
+  fillPatient(data) {
+    this.update = true;
+    this.id = data._id;
+    this.nom = data.nom;
+    this.prenom = data.prenom;
+    this.age = data.age;
+    this.sex = data.sex;
+    this.tele = data.tele;
+  },
+  // delete request
+  DeletePatient(id) {
+    if(confirm('Vous etes sure !???')){
+    axios
+    .delete('http://localhost:4000/api/patients/'+id)
+    .then(res => {
+      this.dataList = res.data;
+      console.log(res);
+      this.getdata();
+    })
+    }
+  },
+  // post rendez vous 
+  AddRdv() {
+    axios
+    .post('http://localhost:4000/api/rendez_vs',{
+      date_rdv : this.date_rdv,
+      acte : this.acte,
+      patient : this.patient_id
+    })
+    .then(res => {
+      this.errors = res.data;
+      console.log(res);
+      this.getdata();
+      const close = document.getElementById('close2');
+      close.click();
+    })
+  },
+  AffecterIdPatient(id) {
+      this.patient_id = id;
+  }
+}
 }
 </script>

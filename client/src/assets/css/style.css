@@ -1,0 +1,12 @@
+body {
+    background-color: #f8f9fa;
+}
+.offcanvas-body ul li{
+    list-style-type: square;
+    margin: 42px 0;
+    
+}
+.offcanvas-body ul li::marker{
+    color: rgb(192, 69, 69);
+    
+}
