@@ -1,6 +1,39 @@
 <template>
     <div>
-        <h1>Home page</h1>
+        <div class="container my-5">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="card text-light bg-primary">
+                <div class="card-body">
+                  <div class="text-center">
+                    <h5>Users</h5>
+                    <h1>14</h1>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card text-light bg-success">
+                <div class="card-body">
+                  <div class="text-center">
+                    <h5>Users</h5>
+                    <h1>14</h1>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card text-light bg-secondary">
+                <div class="card-body">
+                  <div class="text-center">
+                    <h5>Users</h5>
+                    <h1>14</h1>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
 </template>
 <script>
